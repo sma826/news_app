@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -25,6 +24,24 @@ class AppTheme {
         fontSize: 24,
         fontWeight: FontWeight.w500,
         color: white,
+        fontFamily: 'inter',
+      ),
+      titleMedium: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: white,
+        fontFamily: 'inter',
+      ),
+      titleSmall: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: white,
+        fontFamily: 'inter',
+      ),
+      labelSmall: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: grey,
         fontFamily: 'inter',
       ),
     ),

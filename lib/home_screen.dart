@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_application/categories/categories_view.dart';
 import 'package:news_application/constants/app_theme.dart';
+import 'package:news_application/news/news_view.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routname = '/home';
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
           Icon(Icons.search_rounded, color: AppTheme.white, size: 30,)
         ],
       ),
-      body: CategoriesView(),
+      body: NewsView(),
     );
   }
 }
