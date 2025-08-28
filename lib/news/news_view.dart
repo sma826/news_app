@@ -20,6 +20,7 @@ class NewsView extends StatefulWidget {
 
 class _NewsViewState extends State<NewsView> {
   int currentIndex = 0;
+  late Articles article;
   late Future<SourcesResponse> getSourcesFuture = APIServices.getSources(
     widget.categoryId,
   );

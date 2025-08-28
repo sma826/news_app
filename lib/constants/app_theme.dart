@@ -44,6 +44,23 @@ class AppTheme {
         color: grey,
         fontFamily: 'inter',
       ),
+      labelMedium: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: black,
+        fontFamily: 'inter',
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppTheme.black,
+        foregroundColor: AppTheme.white,
+        elevation: 3,
+        textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        alignment: Alignment.center,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: EdgeInsets.all(16),
+      ),
     ),
   );
 }
