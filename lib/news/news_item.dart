@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news_application/constants/app_theme.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:news_application/models/news_response.dart';
 
 class NewsItem extends StatelessWidget {
-  const NewsItem({super.key});
+  final Articles article;
+
+  NewsItem(this.article, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +22,28 @@ class NewsItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              'assets/images/news2.png',
+            child: Image.network(
+              article.urlToImage ??
+                  'https://static.vecteezy.com/system/resources/previews/022/059/000/non_2x/no-image-available-icon-vector.jpg',
               height: MediaQuery.sizeOf(context).height * 0.25,
               width: double.infinity,
               fit: BoxFit.fill,
             ),
           ),
           SizedBox(height: 10),
-          Text(
-            'Nobel Prize in physics awarded to two\nscientists for machine learning discoveries',
-            style: textTheme.titleMedium,
-          ),
+          Text(article.title!, style: textTheme.titleMedium),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('By : Jone Haworth', style: textTheme.labelSmall),
-              Text(timeago.format(dateTime), style: textTheme.labelSmall),
+              Text(
+                'By : ${article.author ?? article.source!.name}',
+                style: textTheme.labelSmall,
+              ),
+              // Text(
+              //       timeago.format(article.publishedAt),
+              //   style: textTheme.labelSmall,
+              // ),
             ],
           ),
         ],
