@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_application/constants/app_theme.dart';
 import 'package:news_application/models/news_response.dart';
 
-import '../widgets/article_details.dart';
+import '../widgets/article_details_bottomSheet.dart';
 
 class NewsItem extends StatelessWidget {
   final Articles article;
