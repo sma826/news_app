@@ -26,4 +26,55 @@ class APIServices {
     Map<String, dynamic> json = jsonDecode(response.body);
     return NewsResponse.fromJson(json);
   }
+
+  static Future<List<Articles>> fetchNews(String? categoryId) async {
+    try {
+      final url = categoryId == null
+          ? Uri.parse("${APIConstants
+          .baseURLSearch}/top-headlines?country=us&apiKey=${APIConstants
+          .apiKey}")
+          : Uri.parse("${APIConstants
+          .baseURLSearch}/top-headlines?country=us&category=$categoryId&apiKey=${APIConstants
+          .apiKey}");
+
+      print("Fetching news from: $url");
+
+      final response = await http.get(url);
+      print("Status code: ${response.statusCode}");
+      print("Response body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final newsResponse = NewsResponse.fromJson(data);
+        print("Articles fetched: ${newsResponse.articles?.length}");
+        return newsResponse.articles ?? [];
+      } else {
+        throw Exception("Failed to load news: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error fetching news: $e");
+      throw Exception("Error fetching news: $e");
+    }
+  }
+
+
+// static Future<List<Articles>> fetchNews(String? categoryId) async {
+//   try {
+//     final url = categoryId == null
+//         ? Uri.parse("$APIConstants.baseURL/top-headlines?country=us&apiKey=$APIConstants.apiKey")
+//         : Uri.parse("$APIConstants.baseURL/top-headlines?country=us&category=$categoryId&apiKey=$APIConstants.apiKey");
+//
+//     final response = await http.get(url);
+//
+//     if (response.statusCode == 200) {
+//       final data = json.decode(response.body);
+//       final newsResponse = NewsResponse.fromJson(data);
+//       return newsResponse.articles ?? [];
+//     } else {
+//       throw Exception("Failed to load news: ${response.statusCode}");
+//     }
+//   } catch (e) {
+//     throw Exception("Error fetching news: $e");
+//   }
+// }
 }

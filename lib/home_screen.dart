@@ -4,6 +4,7 @@ import 'package:news_application/constants/app_theme.dart';
 import 'package:news_application/drawer/home_drawer.dart';
 import 'package:news_application/models/category_model.dart';
 import 'package:news_application/news/news_view.dart';
+import 'package:news_application/search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routname = '/home';
@@ -20,12 +21,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedCategory == null ? 'Home' : selectedCategory!.name),
-        actions: [Icon(Icons.search_rounded, color: AppTheme.white, size: 30)],
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SearchScreen(categoryId: selectedCategory?.id),
+                ),
+              );
+            },
+            child: Icon(Icons.search_rounded, color: AppTheme.white, size: 30),
+          ),
+        ],
       ),
       drawer: HomeDrawer(onGoToHomeClicked: resetSelectedCategory),
       body: selectedCategory == null
           ? CategoriesView(onCategorySelected: onCategorySelected)
-          : NewsView(categoryId: selectedCategory!.id,),
+          : NewsView(categoryId: selectedCategory!.id),
     );
   }
 
