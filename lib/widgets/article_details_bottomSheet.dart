@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_application/constants/app_theme.dart';
-import 'package:news_application/models/news_response.dart';
+import 'package:news_application/news/data/models/news_response.dart';
+import 'package:news_application/shared/constants/app_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArticleDetailsScreen extends StatefulWidget {

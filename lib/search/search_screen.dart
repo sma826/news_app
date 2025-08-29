@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_application/API/api_services.dart';
-import 'package:news_application/constants/app_theme.dart';
-import 'package:news_application/news/news_item.dart';
-import 'package:news_application/widgets/error_indicator.dart';
-import 'package:news_application/widgets/loading_indicator.dart';
+import 'package:news_application/news/view/widgets/news_item.dart';
+import 'package:news_application/shared/constants/app_theme.dart';
+import 'package:news_application/shared/widgets/error_indicator.dart';
+import 'package:news_application/shared/widgets/loading_indicator.dart';
 
 class SearchScreen extends StatefulWidget {
   // final List<Articles> articles;

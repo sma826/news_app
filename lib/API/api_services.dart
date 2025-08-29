@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:news_application/API/api_constants.dart';
-import 'package:news_application/models/news_response.dart';
-import 'package:news_application/models/sources_response.dart';
+import 'package:news_application/news/data/models/news_response.dart';
+import 'package:news_application/shared/constants/api_constants.dart';
+import 'package:news_application/sources/data/models/sources_response.dart';
 
 class APIServices {
   static Future<SourcesResponse> getSources(String categoryId) async {
