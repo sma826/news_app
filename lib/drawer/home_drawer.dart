@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:news_application/constants/app_theme.dart';
+import 'package:news_application/shared/constants/app_theme.dart';
 
 class HomeDrawer extends StatefulWidget {
   final VoidCallback onGoToHomeClicked;

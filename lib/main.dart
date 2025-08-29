@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_application/constants/app_theme.dart';
 import 'package:news_application/home_screen.dart';
+import 'package:news_application/shared/constants/app_theme.dart';
 
 void main() {
   var app = NewsApp;
