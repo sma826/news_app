@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_application/models/category_model.dart';
+import 'package:news_application/categories/data/models/category_model.dart';
 import 'package:news_application/shared/constants/app_theme.dart';
 
 class CategoryItem extends StatelessWidget {
