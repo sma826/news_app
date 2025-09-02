@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_application/news/data/models/news_response.dart';
 import 'package:news_application/news/view/widgets/news_item.dart';
+import 'package:news_application/news/view_model/news_states.dart';
 import 'package:news_application/news/view_model/news_view_model.dart';
 import 'package:news_application/shared/constants/app_theme.dart';
 import 'package:news_application/shared/widgets/error_indicator.dart';
 import 'package:news_application/shared/widgets/loading_indicator.dart';
 import 'package:news_application/sources/view/widgets/tab_item.dart';
+import 'package:news_application/sources/view_model/sources_states.dart';
 import 'package:news_application/sources/view_model/sources_view_model.dart';
-import 'package:provider/provider.dart';
 
 import '../../../sources/data/models/sources_response.dart';
 
@@ -34,17 +36,17 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return BlocProvider(
       create: (_) => sourcesViewModel,
-      child: Consumer<SourcesViewModel>(
-        builder: (_, viewModel, _) {
-          if (viewModel.isLoading) {
+      child: BlocBuilder<SourcesViewModel, SourcesStates>(
+        builder: (context, state) {
+          if (state is GetSourcesLoading) {
             return LoadingIndicator();
-          } else if (viewModel.errorMessage != null) {
-            return ErrorIndicator(viewModel.errorMessage!);
-          } else {
-            List<Sources> sources = viewModel.sources;
-            newsViewModel.getNews(viewModel.sources[currentIndex].id!);
+          } else if (state is GetSourcesError) {
+            return ErrorIndicator(state.message);
+          } else if (state is GetSourcesSuccess) {
+            List<Sources> sources = state.sources;
+            newsViewModel.getNews(state.sources[currentIndex].id!);
 
             return Column(
               children: [
@@ -72,16 +74,16 @@ class _NewsViewState extends State<NewsView> {
                   ),
                 ),
                 Expanded(
-                  child: ChangeNotifierProvider(
+                  child: BlocProvider(
                     create: (_) => newsViewModel,
-                    child: Consumer<NewsViewModel>(
-                      builder: (_, viewModel, _) {
-                        if (viewModel.isLoading) {
+                    child: BlocBuilder<NewsViewModel, NewsStates>(
+                      builder: (context, state) {
+                        if (state is GetNewsLoading) {
                           return LoadingIndicator();
-                        } else if (viewModel.errorMessage != null) {
-                          return ErrorIndicator();
-                        } else {
-                          List<Articles> newsList = viewModel.newsList;
+                        } else if (state is GetNewsError) {
+                          return ErrorIndicator(state.message);
+                        } else if (state is GetNewsSuccess) {
+                          List<Articles> newsList = state.newsList;
                           print("News Length: ${newsList.length}");
                           return ListView.separated(
                             padding: EdgeInsets.only(
@@ -95,6 +97,8 @@ class _NewsViewState extends State<NewsView> {
                                 SizedBox(height: 16),
                             itemCount: newsList.length,
                           );
+                        } else {
+                          return SizedBox();
                         }
                       },
                     ),
@@ -102,6 +106,8 @@ class _NewsViewState extends State<NewsView> {
                 ),
               ],
             );
+          } else {
+            return SizedBox();
           }
         },
       ),
